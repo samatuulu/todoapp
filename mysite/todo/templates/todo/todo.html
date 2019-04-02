@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django Todo List</title>
+</head>
+<body>
+    <h1>This is the Todo list page</h1>
+
+{#    <ul>#}
+{#        <li>temporary todo item A</li>#}
+{#        <li>temporary todo item B</li>#}
+{#    </ul>#}
+
+<ul>
+    {% for todo_item in all_items %}
+        <li>{{ todo_item.content }}
+        <form action="/deleteTodo/{{ todo_item.id }}/" style="display: inline;" method="post">{% csrf_token %}
+             <input type="submit" value="Delete plan"/>
+        </form>
+        </li>
+    {% endfor %}
+</ul>
+
+<form action="/addTodo/" method="post">{% csrf_token %}
+<input type="text" placeholder="Type your plans for today" name="content"/>
+    <input type="submit"  value="Add"/>
+</form>
+
+</body>
+</html>
